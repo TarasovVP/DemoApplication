@@ -1,38 +1,70 @@
-/*
 package com.gmail.tarasov1998.demoapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class RecycleViewAdapter extends Adapter<RecycleViewAdapter.ViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private List<String> namesUsers;
-    private List<String> emailsUsers;
-    private List<String> catchPhrasesUsers;
-    private List<Integer> avatarsUsers;
-    private LayoutInflater mInflater;
+public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
+
+    private  List<String> namesUsers;
+    private  List<String> emailsUsers;
+    private  List<String> catchPhrasesUsers;
+    private  List<Integer> avatarsUsers;
+    private  LayoutInflater mInflater;
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, email, catchPhrase;
+        private Context mContext;
+
+        @BindView(R.id.userName)
+        TextView name;
+        @BindView(R.id.email)
+        TextView email;
+        @BindView(R.id.catchPhrases)
+        TextView catchPhrase;
+        @BindView(R.id.avatar)
         ImageView avatar;
+
+        @BindView(R.id.relative)
+        RelativeLayout relative;
 
         ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.userName);
-            email = itemView.findViewById(R.id.email);
-            catchPhrase = itemView.findViewById(R.id.catchPhrases);
-            avatar = itemView.findViewById(R.id.avatar);
+            ButterKnife.bind(this, itemView);
+            mContext = itemView.getContext();
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int itemPosition = getLayoutPosition();
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    Bundle extras = new Bundle();
+                   /* extras.putString("name", namesUsers.get(itemPosition));
+                    extras.putString("email", emailsUsers.get(itemPosition));
+                    extras.putString("phone", l.getPhone(itemPosition));
+                    extras.putString("website", userModel.getWebsite(itemPosition));*/
+                    intent.putExtras(extras);
+                    mContext.startActivity(intent);
+
+
+
+                }
+            });
         }
+
 
     }
 
@@ -46,16 +78,16 @@ public class RecycleViewAdapter extends Adapter<RecycleViewAdapter.ViewHolder> {
     }
 
 
-
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.users_list, parent, false);
         return new ViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String name = namesUsers.get(position);
         holder.name.setText(name);
         String email = emailsUsers.get(position);
@@ -68,12 +100,10 @@ public class RecycleViewAdapter extends Adapter<RecycleViewAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return namesUsers.size();
 
     }
 
 
-
 }
 
-*/
