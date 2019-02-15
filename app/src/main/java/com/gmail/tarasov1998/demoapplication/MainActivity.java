@@ -40,12 +40,7 @@ public class MainActivity extends AppCompatActivity {
             userModel.setAvatar(R.drawable.ic_launcher_background);
         }
 
-        for (int i = 0; i < 7; i++) {
-            namesUsers.add(userModel.getName(i));
-            emailsUsers.add(userModel.getEmail(i));
-            catchPhrasesUsers.add(userModel.getCatchPhrase(i));
-            avatarsUsers.add(userModel.getAvatar(i));
-        }
+        setData(userModel);
 
         recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
         adapter = new RecycleViewAdapter(this, namesUsers, emailsUsers, catchPhrasesUsers, avatarsUsers);
@@ -56,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    }
+    public void setData(UserModel userModel){
+        for (int i = 0; i < 7; i++) {
+            namesUsers.add(userModel.getName(i));
+            emailsUsers.add(userModel.getEmail(i));
+            catchPhrasesUsers.add(userModel.getCatchPhrase(i));
+            avatarsUsers.add(userModel.getAvatar(i));
+    }
 
     }
 }

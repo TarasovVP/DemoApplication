@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserModel {
     private List<Integer> id = new ArrayList<>();
-    private List<String> name = new ArrayList<>();
+    public List<String> name = new ArrayList<>();
     private List<String> username = new ArrayList<>();
     private List<String> email = new ArrayList<>();
     private List<String> phone = new ArrayList<>();

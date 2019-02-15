@@ -26,6 +26,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     private  LayoutInflater mInflater;
 
 
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         private Context mContext;
 
@@ -52,15 +53,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     int itemPosition = getLayoutPosition();
                     Intent intent = new Intent(mContext, UserActivity.class);
                     Bundle extras = new Bundle();
-                   /* extras.putString("name", namesUsers.get(itemPosition));
-                    extras.putString("email", emailsUsers.get(itemPosition));
-                    extras.putString("phone", l.getPhone(itemPosition));
-                    extras.putString("website", userModel.getWebsite(itemPosition));*/
+                    /*UserModel userModel;
+                    String name = userModel.name.get(itemPosition);
+
+                    extras.putString("name", name);*/
+                   // extras.putString("email", userModel.email.get(itemPosition));
+                    //extras.putString("phone", userModel.phone.get(itemPosition));
+                   // extras.putString("website", userModel.website.get(itemPosition));
                     intent.putExtras(extras);
                     mContext.startActivity(intent);
-
-
-
                 }
             });
         }
