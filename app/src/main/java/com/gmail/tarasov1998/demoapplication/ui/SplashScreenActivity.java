@@ -8,7 +8,7 @@ import com.gmail.tarasov1998.demoapplication.R;
 
 import java.util.concurrent.TimeUnit;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

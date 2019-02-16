@@ -1,9 +1,12 @@
 package com.gmail.tarasov1998.demoapplication.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     WebView webView;
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -40,8 +44,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         Bundle extras = intent.getExtras();
         if (extras != null) {
             userName = extras.getString("userName");
-            userEmail = extras.getString("email");
-            userPhone = extras.getString("phone");
+            userEmail =  "Email: " + extras.getString("email");
+            userPhone =  "Phone: " + extras.getString("phone");
             userWebsite = extras.getString("website");
         }
 
@@ -49,13 +53,32 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         phone.setText(userPhone);
         email.setText(userEmail);
 
+        phone.setOnClickListener(this);
+        email.setOnClickListener(this);
+
 
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(userWebsite);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        Uri data = Uri.parse(userWebsite);
+        webView.loadUrl(data.toString());
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.e_mail:
+                intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + userEmail));
+                startActivity(Intent.createChooser(intent, "Send feedback"));
+                break;
+            case R.id.phone:
+                intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + userPhone));
+                startActivity(intent);
+                break;
 
+        }
     }
 }
