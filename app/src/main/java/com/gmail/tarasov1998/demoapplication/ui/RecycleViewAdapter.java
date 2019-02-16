@@ -1,4 +1,4 @@
-package com.gmail.tarasov1998.demoapplication;
+package com.gmail.tarasov1998.demoapplication.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,21 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.List;
+import com.gmail.tarasov1998.demoapplication.R;
+import com.gmail.tarasov1998.demoapplication.model.UserModel;
+import com.gmail.tarasov1998.demoapplication.network.Network;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
-    private  List<String> namesUsers;
-    private  List<String> emailsUsers;
-    private  List<String> catchPhrasesUsers;
-    private  List<Integer> avatarsUsers;
-    private  LayoutInflater mInflater;
+
+    private LayoutInflater mInflater;
+
+    private static UserModel userModel;
+
 
 
 
@@ -31,16 +33,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         private Context mContext;
 
         @BindView(R.id.userName)
-        TextView name;
+        TextView userName;
         @BindView(R.id.email)
         TextView email;
         @BindView(R.id.catchPhrases)
         TextView catchPhrase;
         @BindView(R.id.avatar)
         ImageView avatar;
-
-        @BindView(R.id.relative)
-        RelativeLayout relative;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -52,14 +51,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 public void onClick(View view) {
                     int itemPosition = getLayoutPosition();
                     Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Bundle extras = new Bundle();
-                    /*UserModel userModel;
-                    String name = userModel.name.get(itemPosition);
 
-                    extras.putString("name", name);*/
-                   // extras.putString("email", userModel.email.get(itemPosition));
-                    //extras.putString("phone", userModel.phone.get(itemPosition));
-                   // extras.putString("website", userModel.website.get(itemPosition));
+                    extras.putString("userName", userModel.getName(itemPosition));
+                    extras.putString("email", userModel.getEmail(itemPosition));
+                    extras.putString("phone", userModel.getPhone(itemPosition));
+                    extras.putString("website", userModel.getWebsite(itemPosition));
                     intent.putExtras(extras);
                     mContext.startActivity(intent);
                 }
@@ -70,12 +68,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
 
-    RecycleViewAdapter(Context context, List<String> name, List<String> email, List<String> catchPhrase, List<Integer> avatars) {
+    RecycleViewAdapter(Context context, UserModel userModel) {
         this.mInflater = LayoutInflater.from(context);
-        this.namesUsers = name;
-        this.emailsUsers = email;
-        this.catchPhrasesUsers = catchPhrase;
-        this.avatarsUsers = avatars;
+        RecycleViewAdapter.userModel = userModel;
     }
 
 
@@ -89,19 +84,20 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String name = namesUsers.get(position);
-        holder.name.setText(name);
-        String email = emailsUsers.get(position);
+        Context context = holder.itemView.getContext();
+        String name = userModel.getUsername(position);
+        holder.userName.setText(name);
+        String email = userModel.getEmail(position);
         holder.email.setText(email);
-        String catchPhrase = catchPhrasesUsers.get(position);
+        String catchPhrase = userModel.getCatchPhrase(position);
         holder.catchPhrase.setText(catchPhrase);
-        Integer avatar = avatarsUsers.get(position);
-        holder.avatar.setImageResource(avatar);
+        Picasso.with(context).load(new Network().getAvatars(position)).into(holder.avatar);
+
     }
 
     @Override
     public int getItemCount() {
-        return namesUsers.size();
+        return userModel.getCount();
 
     }
 

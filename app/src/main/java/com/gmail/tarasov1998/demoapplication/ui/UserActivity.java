@@ -1,17 +1,19 @@
-package com.gmail.tarasov1998.demoapplication;
+package com.gmail.tarasov1998.demoapplication.ui;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.gmail.tarasov1998.demoapplication.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements View.OnClickListener {
     private String userName;
     private String userEmail;
     private String userPhone;
@@ -29,6 +31,7 @@ public class UserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
@@ -36,10 +39,10 @@ public class UserActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            userName = extras.getString("name");
-           /* userEmail = extras.getString("email");
+            userName = extras.getString("userName");
+            userEmail = extras.getString("email");
             userPhone = extras.getString("phone");
-            userWebsite = extras.getString("website");*/
+            userWebsite = extras.getString("website");
         }
 
         name.setText(userName);
@@ -48,7 +51,11 @@ public class UserActivity extends AppCompatActivity {
 
 
         webView.setWebViewClient(new WebViewClient());
-        Uri data = null;
-        webView.loadUrl(data.toString());
+        webView.loadUrl(userWebsite);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

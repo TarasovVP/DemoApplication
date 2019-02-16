@@ -1,25 +1,16 @@
-package com.gmail.tarasov1998.demoapplication;
+package com.gmail.tarasov1998.demoapplication.model;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel {
-    private List<Integer> id = new ArrayList<>();
-    public List<String> name = new ArrayList<>();
+    private List<String> name = new ArrayList<>();
     private List<String> username = new ArrayList<>();
     private List<String> email = new ArrayList<>();
     private List<String> phone = new ArrayList<>();
     private List<String> catchPhrase = new ArrayList<>();
     private List<String> website = new ArrayList<>();
-    private List<Integer> avatar = new ArrayList<>();
-
-    public int getId(int index) {
-        return id.get(index);
-    }
-
-    public void setId(int i) {
-        id.add(i);
-    }
 
     public String getName(int index) {
         return name.get(index);
@@ -57,7 +48,7 @@ public class UserModel {
         return catchPhrase.get(index);
     }
 
-    public void setCatchPhrase(String c) {
+     public void setCatchPhrase(String c) {
         catchPhrase.add(c);
     }
 
@@ -69,12 +60,8 @@ public class UserModel {
         website.add(w);
     }
 
-    public int getAvatar(int index) {
-        return avatar.get(index);
-    }
-
-    public void setAvatar(int a) {
-        avatar.add(a);
+     public int getCount(){
+        return name.size();
     }
 
 
