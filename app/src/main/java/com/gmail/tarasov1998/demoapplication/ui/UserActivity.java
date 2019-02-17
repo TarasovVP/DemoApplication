@@ -58,10 +58,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         phone.setText(userPhone);
         email.setText(userEmail);
 
-        phone.setOnClickListener(this);
-        email.setOnClickListener(this);
-
-
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(userWebsite);
 
@@ -70,6 +66,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+        phone.setOnClickListener(this);
+        email.setOnClickListener(this);
 
     }
 
