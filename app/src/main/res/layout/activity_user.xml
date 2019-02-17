@@ -17,14 +17,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
-            android:textStyle="bold" />
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/e_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
+            android:textColor="@color/blue"
             android:textSize="20sp" />
 
         <TextView
@@ -32,8 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:textStyle="bold" />
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:gravity="center_horizontal" />
 
 
     </LinearLayout>
@@ -41,15 +45,23 @@
 
     <LinearLayout
         android:id="@+id/bottomLayoutShowWeather"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <WebView
             android:id="@+id/webView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </WebView>
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_weight="1"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
 
     </LinearLayout>
 

@@ -10,7 +10,7 @@
     <item>
 
         <bitmap
-            android:src="@drawable/logomin"
+            android:src="@drawable/users"
             android:gravity="center"/>
 
     </item>

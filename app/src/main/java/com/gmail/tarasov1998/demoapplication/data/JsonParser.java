@@ -24,8 +24,13 @@ public class JsonParser {
             userModel.setPhone(getString("phone", jObj));
             userModel.setWebsite(getString("website", jObj));
 
-            JSONObject compObj = jObj.getJSONObject("company");
-            userModel.setCatchPhrase(getString("catchPhrase", compObj));
+            JSONObject address = jObj.getJSONObject("address");
+            JSONObject geo = address.getJSONObject("geo");
+            userModel.setLat(getDouble("lat", geo));
+            userModel.setLng(getDouble("lng", geo));
+
+            JSONObject company = jObj.getJSONObject("company");
+            userModel.setCatchPhrase(getString("catchPhrase", company));
 
 
         }
@@ -35,6 +40,9 @@ public class JsonParser {
     }
     private static String getString(String tagName, JSONObject jObj) throws JSONException {
         return jObj.getString(tagName);
+    }
+    private static Double getDouble(String tagName, JSONObject jObj) throws JSONException {
+        return jObj.getDouble(tagName);
     }
 
 }

@@ -1,26 +1,27 @@
 package com.gmail.tarasov1998.demoapplication.ui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.gmail.tarasov1998.demoapplication.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserActivity extends AppCompatActivity implements View.OnClickListener {
-    private String userName;
-    private String userEmail;
-    private String userPhone;
-    private String userWebsite;
+public class UserActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
+    private String userName, userEmail, userPhone, userWebsite;
+    private Double lat, lng;
 
     @BindView(R.id.user_name)
     TextView name;
@@ -31,8 +32,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.webView)
     WebView webView;
 
+    SupportMapFragment mapFragment;
 
-    @SuppressLint("SetJavaScriptEnabled")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -47,6 +49,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             userEmail =  "Email: " + extras.getString("email");
             userPhone =  "Phone: " + extras.getString("phone");
             userWebsite = extras.getString("website");
+            lat = extras.getDouble("lat");
+            lng = extras.getDouble("lng");
+
         }
 
         name.setText(userName);
@@ -58,10 +63,14 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
 
         webView.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        Uri data = Uri.parse(userWebsite);
-        webView.loadUrl(data.toString());
+        webView.loadUrl(userWebsite);
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+
     }
 
     @Override
@@ -80,5 +89,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(lat, lng))
+                .title("Marker"));
+
     }
 }

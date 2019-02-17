@@ -58,6 +58,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     extras.putString("email", userModel.getEmail(itemPosition));
                     extras.putString("phone", userModel.getPhone(itemPosition));
                     extras.putString("website", userModel.getWebsite(itemPosition));
+                    extras.putDouble("lat", userModel.getLat(itemPosition));
+                    extras.putDouble("lng", userModel.getLng(itemPosition));
                     intent.putExtras(extras);
                     mContext.startActivity(intent);
                 }

@@ -11,6 +11,8 @@ public class UserModel {
     private List<String> phone = new ArrayList<>();
     private List<String> catchPhrase = new ArrayList<>();
     private List<String> website = new ArrayList<>();
+    private List<Double> lat = new ArrayList<>();
+    private List<Double> lng = new ArrayList<>();
 
     public String getName(int index) {
         return name.get(index);
@@ -64,6 +66,20 @@ public class UserModel {
         return name.size();
     }
 
+    public Double getLat(int index) {
+        return lat.get(index);
+    }
 
+    public void setLat(Double l) {
+        lat.add(l);
+    }
+
+    public Double getLng(int index) {
+        return lng.get(index);
+    }
+
+    public void setLng(Double ln) {
+        lng.add(ln);
+    }
 
 }
