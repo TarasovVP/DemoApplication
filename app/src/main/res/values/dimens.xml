@@ -1,6 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_size">18sp</dimen>
-    <dimen name="cityShowWeather">30sp</dimen>
-    <dimen name="temperatureShowWeather">36sp</dimen>
+    <dimen name="text_size_activity_user">20sp</dimen>
+    <dimen name="text_size_users_list">12sp</dimen>
 </resources>
