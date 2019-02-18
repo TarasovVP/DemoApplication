@@ -12,24 +12,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gmail.tarasov1998.demoapplication.R;
-import com.gmail.tarasov1998.demoapplication.model.UserModel;
-import com.gmail.tarasov1998.demoapplication.network.Network;
+import com.gmail.tarasov1998.demoapplication.model.User;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
+    private static final String AVATARS = "https://avatars.io/twitter/";
+
+    private static List<User> usersList;
 
     private LayoutInflater mInflater;
 
-    private static UserModel userModel;
-
-
-
-
     static class ViewHolder extends RecyclerView.ViewHolder {
+
         private Context mContext;
 
         @BindView(R.id.userName)
@@ -54,27 +54,23 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Bundle extras = new Bundle();
 
-                    extras.putString("userName", userModel.getName(itemPosition));
-                    extras.putString("email", userModel.getEmail(itemPosition));
-                    extras.putString("phone", userModel.getPhone(itemPosition));
-                    extras.putString("website", userModel.getWebsite(itemPosition));
-                    extras.putDouble("lat", userModel.getLat(itemPosition));
-                    extras.putDouble("lng", userModel.getLng(itemPosition));
+                    extras.putString("userName", usersList.get(itemPosition).getName());
+                    extras.putString("email", usersList.get(itemPosition).getEmail());
+                    extras.putString("phone", usersList.get(itemPosition).getPhone());
+                    extras.putString("website", usersList.get(itemPosition).getWebsite());
+                    extras.putDouble("lat", usersList.get(itemPosition).getAddress().getGeo().getLat());
+                    extras.putDouble("lng", usersList.get(itemPosition).getAddress().getGeo().getLng());
                     intent.putExtras(extras);
                     mContext.startActivity(intent);
                 }
             });
         }
-
-
     }
 
-
-    RecycleViewAdapter(Context context, UserModel userModel) {
+    RecycleViewAdapter(Context context, List<User> usersList) {
         this.mInflater = LayoutInflater.from(context);
-        RecycleViewAdapter.userModel = userModel;
+        RecycleViewAdapter.usersList = usersList;
     }
-
 
     @NonNull
     @Override
@@ -87,22 +83,24 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
-        String name = userModel.getUsername(position);
+        String name = usersList.get(position).getName();
         holder.userName.setText(name);
-        String email = userModel.getEmail(position);
+        String email = usersList.get(position).getEmail();
         holder.email.setText(email);
-        String catchPhrase = userModel.getCatchPhrase(position);
+        String catchPhrase = usersList.get(position).getCompany().getCatchPhrase();
         holder.catchPhrase.setText(catchPhrase);
-        Picasso.with(context).load(new Network().getAvatars(position)).into(holder.avatar);
+        Picasso.with(context).load(getAvatars(position)).into(holder.avatar);
 
     }
 
     @Override
     public int getItemCount() {
-        return userModel.getCount();
-
+        return usersList.size();
     }
 
+   private String getAvatars(Integer id) {
+        return AVATARS + id;
+    }
 
 }
 

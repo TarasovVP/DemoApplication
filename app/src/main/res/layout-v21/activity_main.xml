@@ -8,13 +8,6 @@
     android:background="@color/grey"
     tools:context=".ui.MainActivity">
 
-        <LinearLayout
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context="com.gmail.tarasov1998.wfu2.RecycleView">
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycle_view"
                     android:layout_width="match_parent"
@@ -22,9 +15,5 @@
                     android:layout_marginEnd="0dp"
                     android:clipToPadding="true"
                     android:nestedScrollingEnabled="false" />
-
-        </LinearLayout>
-
-   
 
 </LinearLayout>

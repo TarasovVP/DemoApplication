@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
+
     private String userName, userEmail, userPhone, userWebsite;
     private Double lat, lng;
 
