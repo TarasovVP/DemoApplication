@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.gmail.tarasov1998.demoapplication.R;
 import com.gmail.tarasov1998.demoapplication.model.User;
-import com.gmail.tarasov1998.demoapplication.network.NetworkService;
+import com.gmail.tarasov1998.demoapplication.api.NetworkService;
 
 import java.util.List;
 

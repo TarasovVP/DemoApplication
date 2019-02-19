@@ -1,6 +1,4 @@
-package com.gmail.tarasov1998.demoapplication.network;
-
-import com.gmail.tarasov1998.demoapplication.api.WebService;
+package com.gmail.tarasov1998.demoapplication.api;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,7 +31,7 @@ public class NetworkService {
         return mInstance;
     }
 
-    public WebService getJSONApi() {
-        return mRetrofit.create(WebService.class);
+    public ApiService getJSONApi() {
+        return mRetrofit.create(ApiService.class);
     }
 }

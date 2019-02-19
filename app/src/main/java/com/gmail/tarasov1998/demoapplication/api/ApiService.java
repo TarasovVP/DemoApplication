@@ -8,7 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 
-public interface WebService {
+public interface ApiService {
 
     @GET("/users")
      Call<List<User>> getAllUsers();
