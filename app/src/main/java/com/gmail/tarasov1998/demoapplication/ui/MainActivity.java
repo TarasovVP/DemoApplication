@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
-                        Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), R.string.error, Toast.LENGTH_SHORT).show();
                     }
 
                 });

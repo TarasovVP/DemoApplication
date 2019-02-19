@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Users</string>
     <string name="todo">Set avatar</string>
+    <string name="error">Error</string>
 </resources>
