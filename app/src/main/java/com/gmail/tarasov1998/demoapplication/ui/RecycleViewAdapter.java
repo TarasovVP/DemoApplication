@@ -58,6 +58,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     extras.putString("email", usersList.get(itemPosition).getEmail());
                     extras.putString("phone", usersList.get(itemPosition).getPhone());
                     extras.putString("website", usersList.get(itemPosition).getWebsite());
+                    extras.putString("address", "Address: " + usersList.get(itemPosition).getAddress().getCity() + ", street" + usersList.get(itemPosition).getAddress().getStreet() + ", " + usersList.get(itemPosition).getAddress().getSuite());
                     extras.putDouble("lat", usersList.get(itemPosition).getAddress().getGeo().getLat());
                     extras.putDouble("lng", usersList.get(itemPosition).getAddress().getGeo().getLng());
                     intent.putExtras(extras);
@@ -98,7 +99,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return usersList.size();
     }
 
-   private String getAvatars(Integer id) {
+    private String getAvatars(Integer id) {
         return AVATARS + id;
     }
 

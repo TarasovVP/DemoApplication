@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
-    private String userName, userEmail, userPhone, userWebsite;
+    private String userName, userEmail, userPhone, userWebsite, address;
     private Double lat, lng;
 
     @BindView(R.id.user_name)
@@ -50,6 +50,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             userEmail =  "Email: " + extras.getString("email");
             userPhone =  "Phone: " + extras.getString("phone");
             userWebsite = extras.getString("website");
+            address = extras.getString("address");
             lat = extras.getDouble("lat");
             lng = extras.getDouble("lng");
 
@@ -94,7 +95,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     public void onMapReady(GoogleMap googleMap) {
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(lat, lng))
-                .title("Marker"));
+                .title(address));
 
     }
 }
