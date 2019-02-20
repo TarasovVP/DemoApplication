@@ -15,6 +15,7 @@ import com.gmail.tarasov1998.demoapplication.R;
 import com.gmail.tarasov1998.demoapplication.model.User;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,6 +62,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     extras.putString("address", "Address: " + usersList.get(itemPosition).getAddress().getCity() + ", street" + usersList.get(itemPosition).getAddress().getStreet() + ", " + usersList.get(itemPosition).getAddress().getSuite());
                     extras.putDouble("lat", usersList.get(itemPosition).getAddress().getGeo().getLat());
                     extras.putDouble("lng", usersList.get(itemPosition).getAddress().getGeo().getLng());
+
+                    extras.putSerializable("list", (Serializable) usersList);
+
                     intent.putExtras(extras);
                     mContext.startActivity(intent);
                 }

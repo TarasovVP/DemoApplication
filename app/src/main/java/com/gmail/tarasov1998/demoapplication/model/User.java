@@ -1,7 +1,5 @@
 package com.gmail.tarasov1998.demoapplication.model;
 
-
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -83,9 +81,5 @@ public class User implements Serializable {
     public void setWebsite(String website) {
         this.website = website;
     }
-
-
-
-
 
 }

@@ -3,7 +3,9 @@ package com.gmail.tarasov1998.demoapplication.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
 
     @SerializedName("catchPhrase")
     private String catchPhrase;
