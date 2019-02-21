@@ -10,6 +10,8 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.gmail.tarasov1998.demoapplication.R;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -67,7 +69,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
+
         }
+
         phone.setOnClickListener(this);
         email.setOnClickListener(this);
 
@@ -80,11 +84,11 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.e_mail:
                 intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:" + userEmail));
-                startActivity(Intent.createChooser(intent, "Send feedback"));
+                startActivity(Intent.createChooser(intent, "Send email: "));
                 break;
             case R.id.phone:
                 intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + userPhone));
+                intent.setData(Uri.parse("Make call:" + userPhone));
                 startActivity(intent);
                 break;
 
@@ -93,9 +97,12 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        LatLng coordinate = new LatLng(lat, lng);
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(lat, lng))
-                .title(address));
-
+                .position(coordinate)
+                .title("Address"))
+                .setSnippet(address);
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 15f);
+        googleMap.animateCamera(yourLocation);
     }
 }

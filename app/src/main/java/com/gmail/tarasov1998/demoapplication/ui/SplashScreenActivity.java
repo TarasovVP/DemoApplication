@@ -20,11 +20,13 @@ import retrofit2.Response;
 
 public class SplashScreenActivity extends AppCompatActivity {
     List<User> listUsers;
-
+    Intent intent;
+    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -36,11 +38,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
                                 listUsers = response.body();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                Bundle extras = new Bundle();
+                                intent = new Intent(getApplicationContext(), MainActivity.class);
+                                extras = new Bundle();
                                 extras.putSerializable("listUsers", (Serializable) listUsers);
                                 intent.putExtra("bundle", extras);
                                 startActivity(intent);
+                                finish();
                             }
 
                             @Override
@@ -49,6 +52,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                             }
 
                         });
+
+
             }
         }, 3000);
 
