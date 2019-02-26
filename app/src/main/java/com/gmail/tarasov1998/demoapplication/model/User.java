@@ -4,7 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+
+public class User extends RealmObject implements Serializable {
+
+    @PrimaryKey
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("name")
     private String name;
 
@@ -25,6 +34,14 @@ public class User implements Serializable {
 
     @SerializedName("company")
     private Company company;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Address getAddress() {
         return address;

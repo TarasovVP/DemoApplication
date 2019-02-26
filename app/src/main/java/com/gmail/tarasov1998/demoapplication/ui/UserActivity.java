@@ -88,7 +88,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.phone:
                 intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("Make call:" + userPhone));
+                intent.setData(Uri.parse("tel:" + userPhone));
                 startActivity(intent);
                 break;
 
