@@ -31,9 +31,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                ApiNetworkService.getInstance()
-                        .getJSONApi()
-                        .getAllUsers()
+                ApiNetworkService.getService().getAllUsers()
                         .enqueue(new Callback<List<User>>() {
                             @Override
                             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
