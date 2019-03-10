@@ -2,5 +2,6 @@
     <string name="app_name">Users</string>
     <string name="todo">Set avatar</string>
     <string name="error">Error</string>
+    <string name="error2">Error2</string>
     <string name="url_base">https://jsonplaceholder.typicode.com</string>
 </resources>
